@@ -63,23 +63,62 @@ int main()
 int parseLine(char result[], char opp[], int* home, int* away)
 {
 	//stores position of desired character
-	
+	char* p1;
+	char* p2;
+
+	p1 = strstr(result, ",");
+	if (p1)
+	{
+		p2 = strstr(p1, "-");
+		if (p2)
+		{
 			//assigns home score to char opp
+			snprintf(opp, sizeof(opp), "%.*s\n", p2 - p1 - 1, p1 + 1);
 
 			//converts home score from char to int
-			
+			*home = strtol(opp, &p1, 0);
+		}
+	}
+	else
+	{
+		return -1;
+	}
 
-
+	p1 = strstr(result, "-");
+	if (p1)
+	{
+		p2 = strstr(p1, "");
+		if (p2)
+		{
 			//assigns away score to char opp
+			snprintf(opp, sizeof(opp), "% .*s\n", p2 - p1 - 3, p1 + 1);
 
 			//converts away score from char to int
+			*away = strtol(opp, &p1, 0);
+		}
+	}
+	else
+	{
+		return -1;
+	}
 
-
-
+	p1 = strstr(result, "");
+	if (p1)
+	{
+		p2 = strstr(p1, "-");
+		if (p2)
+		{
 			//assigns teamname score to char opp
+			snprintf(opp, 121, "%.*s\n", p2 - p1 - 3, p1);
+		}
+	}
+	else
+	{
+		return -1;
+	}
+
 	return 0;
 }
-
 
 
 
