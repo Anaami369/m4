@@ -24,10 +24,18 @@ int processGames(char fileName[]);
 #pragma warning(disable: 4996)
 int main()
 {
+	FILE* fp;
+	char str[1211] = { 0 };
 
 	//opening file for reading 
+	fp = fopen("teams.txt", "r");
 
 	//if opening file was unsuccessful
+	if (fp == NULL) {
+		printf("Error opening file");
+		return(-1);
+	}
+
 
 			//reads file line by line and stores info in string str
 
