@@ -152,7 +152,7 @@ int processGames(char filename[])
 						//tied
 						
 
-		//calculates winig percentage 
+		//calculates winning percentage 
 
 		//displays winning percentage along with wins-ties-losses
 		
