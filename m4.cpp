@@ -149,64 +149,194 @@ int parseLine(char result[], char opp[], int* home, int* away)
 //
 int processGames(char filename[])
 {
-	
+	FILE* fp;
+	char str[100] = { 0 };
+
 	//opening file for reading
+	fp = fopen(filename, "r");
 
 	//error checking file opening process
-	
+	if (fp == NULL) {
+		printf("Error opening file");
+		return(-1);
+	}
+
+	else
+	{
 		//stores position of desired character
-		
+		char* p1;
+		char* p2;
+
+		char fullFile[121] = { 0 };
+		double result = 0;
+		int statusCheck = 0;
+
 		//retreives file name without .txt extension
-		
+		p1 = strstr(filename, "");
+		if (p1)
+		{
+			p2 = strstr(p1, ".");
+			if (p2)
+			{
 				//stores name of file without .txt extension to fullFile
+				snprintf(fullFile, 121, "%.*s\n", p2 - p1, p1);
 
 				//gets rid of the new line character at the end of the string
-				
+				fullFile[strcspn(fullFile, "\n")] = 0;
+			}
+		}
+
+		int wins = 0;
+		int ties = 0;
+		int losses = 0;
+
 		//printong processing statement
-		
+		printf("Processing %s:\n", filename);
+
+		for (int j = 0; j < 3; j++)
+		{
 			//stores all lines of file one by one to str
-			
+			if (fgets(str, 60, fp) != NULL)
+			{
+				if (j == 0)
+				{
+					char teamName1[121];
+					int home1 = 0;
+					int away1 = 0;
+
 					//parses the first line
+					statusCheck = parseLine(str, teamName1, &home1, &away1);
 
 					//error checking parsing of line
-					
+					if (statusCheck == -1)
+					{
+						printf("Error parsing first team info.\n");
+						return -1;
+					}
+					else
+					{
 						//checking if team:
 						//won
-						
+						if (home1 > away1)
+						{
+							wins++;
+							teamName1[strcspn(teamName1, "\n")] = 0;
+							printf("\t%s beat %s %d-%d\n", fullFile, teamName1, home1, away1);
+						}
 						//lost
-						
+						else if (home1 < away1)
+						{
+							losses++;
+							teamName1[strcspn(teamName1, "\n")] = 0;
+							printf("\t%s lost to %s %d-%d\n", fullFile, teamName1, home1, away1);
+						}
 						//tied
-						
+						else if (home1 = away1)
+						{
+							ties++;
+							teamName1[strcspn(teamName1, "\n")] = 0;
+							printf("\t3%s and %s tied at %d-%d\n", fullFile, teamName1, home1, away1);
+						}
+					}
+				}
+				else if (j == 1)
+				{
+					char teamName2[121];
+					int home2 = 0;
+					int away2 = 0;
 
 					//parses the second line
+					statusCheck = parseLine(str, teamName2, &home2, &away2);
 
 					//error checking parsing of line
-					
+					if (statusCheck == -1)
+					{
+						printf("Error parsing first team info.\n");
+						return -1;
+					}
+					else
+					{
 						//checking if team:
 						//won
-						
+						if (home2 > away2)
+						{
+							wins++;
+							teamName2[strcspn(teamName2, "\n")] = 0;
+							printf("\t%s beat %s %d-%d\n", fullFile, teamName2, home2, away2);
+						}
 						//lost
-						
+						else if (home2 < away2)
+						{
+							losses++;
+							teamName2[strcspn(teamName2, "\n")] = 0;
+							printf("\t%s lost to %s %d-%d\n", fullFile, teamName2, home2, away2);
+						}
 						//tied
-						
+						else if (home2 = away2)
+						{
+							ties++;
+							teamName2[strcspn(teamName2, "\n")] = 0;
+							printf("\t%s and %s tied at %d-%d\n", fullFile, teamName2, home2, away2);
+						}
+					}
+				}
+				else if (j == 2)
+				{
+					char teamName3[121];
+					int home3 = 0;
+					int away3 = 0;
 
 					//parses the third line
+					statusCheck = parseLine(str, teamName3, &home3, &away3);
 
 					//error checking parsing of line
-					
+					if (statusCheck == -1)
+					{
+						printf("Error parsing first team info.\n");
+						return -1;
+					}
+					else
+					{
 						//checking if team:
 						//won
-						
+						if (home3 > away3)
+						{
+							wins++;
+							teamName3[strcspn(teamName3, "\n")] = 0;
+							printf("\t%s beat %s %d-%d\n", fullFile, teamName3, home3, away3);
+						}
 						//lost
-						
+						else if (home3 < away3)
+						{
+							losses++;
+							teamName3[strcspn(teamName3, "\n")] = 0;
+							printf("\t%s lost to %s %d-%d\n", fullFile, teamName3, home3, away3);
+						}
 						//tied
-						
+						else if (home3 = away3)
+						{
+							ties++;
+							teamName3[strcspn(teamName3, "\n")] = 0;
+							printf("%s and %s tied at %d-%d\n", fullFile, teamName3, home3, away3);
+						}
+					}
+				}
+			}
+		}
 
-		//calculates winning percentage 
+		//calculates winig percentage 
+		result = (2 * (double)wins + ties) / (2 * ((double)wins + losses + ties));
 
 		//displays winning percentage along with wins-ties-losses
-		
+		printf("Season result for %s: %0.3lf (%d-%d-%d)\n\n", fullFile, result, wins, ties, losses);
+	}
+
 	//error checks file closing process
+	if (fclose(fp) != 0)
+	{
+		printf("Error closing input file\n");
+		return -1;
+	}
 
 	return 0;
 }
