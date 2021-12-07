@@ -37,8 +37,11 @@ int main()
 	}
 
 
-			//reads file line by line and stores info in string str
-
+	//reads file line by line and stores info in string str
+	while (fgets(str, 60, fp) != NULL)
+	{
+		printf(str);
+	}
 					//checking first line
 
 					//checking second line
