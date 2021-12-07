@@ -1,0 +1,41 @@
+commit ea57e2b44f2b1fbb13bf4747f17345c9b9d5754e
+Author: Anaami Patel <anaamisvm@gmail.com>
+Date:   Mon Dec 6 18:38:02 2021 -0500
+
+    Added student number to name line in file header.
+
+commit 4a49663e6b58a96aa230b99bd2c5221de3abe205
+Author: Anaami Patel <anaamisvm@gmail.com>
+Date:   Mon Dec 6 18:37:14 2021 -0500
+
+    Coded main() function and working.
+
+commit 7d96b1e0fca8470e7e3b8d840aafaea4555c6787
+Author: Anaami Patel <anaamisvm@gmail.com>
+Date:   Mon Dec 6 18:00:49 2021 -0500
+
+    processGames() function coded and working
+
+commit d4b90997f0f7f56b0bab38f6df1d4a4ddbc5dd52
+Author: Anaami Patel <anaamisvm@gmail.com>
+Date:   Mon Dec 6 17:38:54 2021 -0500
+
+    Reading text file and displaying to screen successfull
+
+commit d57375c66a7ac38ec8d98fccc9cd055c249efa42
+Author: Anaami Patel <anaamisvm@gmail.com>
+Date:   Mon Dec 6 17:36:52 2021 -0500
+
+    Opening text file successfull
+
+commit 33fd04bdeb112772b9c6024ae618e2a5016e26ee
+Author: Anaami Patel <anaamisvm@gmail.com>
+Date:   Mon Dec 6 17:16:14 2021 -0500
+
+    Completed coding parseLine() function
+
+commit 953eef05dbec9d7d8831e462184e686da6d202f4
+Author: Anaami Patel <anaamisvm@gmail.com>
+Date:   Mon Dec 6 17:04:22 2021 -0500
+
+    Made major 4 skeleton code
