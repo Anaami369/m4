@@ -1,17 +1,17 @@
 /*
-* FILE : f6.ccp
+* FILE : m4.ccp
 * PROJECT : PROG1345 - Major 4
-* PROGRAMMER : Anaami Patel 8759633
-* FIRST VERSION : 2021-12-01
+* PROGRAMMER : Anaami Patel
+* FIRST VERSION : 2021 - 12 - 01
 * DESCRIPTION :
 * This function reads the file teams.txt and extracts the teams names from it.
 * After the names are extracted, the teams' files are opened, and the info
-* from the file is parsed. That parsed info is then used to display the
+* from the file is parsed.That parsed info is then used to display the
 * amount of games that that team lost, won, or tied and who they played against
-* and their final winning percentage is then displayed to the screen.
+* andtheir final winning percentage is then displayed to the screen.
 */
 
-#include <string>
+#include <string.h>
 #include <stdio.h>
 #include <stdlib.h>
 
@@ -31,27 +31,34 @@ int main()
 	fp = fopen("teams.txt", "r");
 
 	//if opening file was unsuccessful
-	if (fp == NULL) {
+	if ((fp = fopen("teams.txt", "r")) == NULL) 
+	{
 		printf("Error opening file");
 		return(-1);
 	}
 
-
-	//reads file line by line and stores info in string str
-	while (fgets(str, 60, fp) != NULL)
+	else
 	{
-		printf(str);
+		//reads file line by line and stores info in string str
+		while (fgets(str, 60, fp) != NULL)
+		{
+			//removes the null character at the end of the string
+			str[strcspn(str, "\n")] = 0;
+
+			//calls processGames()
+			processGames(str);
+		}
 	}
-					//checking first line
 
-					//checking second line
-
-					//checking third line
-
-					//checking fourth line
-
-
-		//checking whether if file closed properly
+	//checking whether if file closed properly
+	if (fclose(fp) != 0)
+	{
+		printf("Error closing input file\n");
+	}
+	else
+	{
+		return 0;
+	}
 }
 
 
@@ -134,8 +141,9 @@ int parseLine(char result[], char opp[], int* home, int* away)
 
 
 
+
 //
-// FUNCTION : parseLine
+// FUNCTION : processGames
 // DESCRIPTION :
 // This function opens the file from the parameter and calculates its winning 
 // percentage after parsing the info after calling parseLine. It also 
@@ -156,8 +164,9 @@ int processGames(char filename[])
 	fp = fopen(filename, "r");
 
 	//error checking file opening process
-	if (fp == NULL) {
-		printf("Error opening file");
+	if ((fp = fopen(filename, "r")) == NULL) 
+	{
+		printf("Error opening file ");
 		return(-1);
 	}
 
@@ -189,11 +198,12 @@ int processGames(char filename[])
 		int wins = 0;
 		int ties = 0;
 		int losses = 0;
+		int j = 0;
 
 		//printong processing statement
 		printf("Processing %s:\n", filename);
 
-		for (int j = 0; j < 3; j++)
+		for (j = 0; j < 3; j++)
 		{
 			//stores all lines of file one by one to str
 			if (fgets(str, 60, fp) != NULL)
